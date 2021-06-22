@@ -1,0 +1,23 @@
+<아키텍처를 사용하면 좋은 이유>
+- 일관적인 코드 작성(유지보수, 협업면에서 좋음)
+- 생산성 향상
+- 테스트 용이
+- 앱 개발의 방향성을 잡아줌 등
+
+
+1. MVP 아키텍처
+    - Model + View(ViewController) + Presenter(비즈니스 로직과 뷰를 제어)
+
+2. MVVM 아키텍처
+    - Model + View + ViewModel
+    - MVVM + DataBinding
+
+3. 구글 아키텍처
+    -
+
+4. MVI 아키텍처
+    - Model + View + Intent
+
+
+
+https://classroom.udacity.com/courses/ud9012
