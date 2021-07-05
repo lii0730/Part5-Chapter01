@@ -4,6 +4,7 @@ import com.example.aop_part5_chapter01.data.Entity.TodoEntity
 import com.example.aop_part5_chapter01.domain.todo.InsertTodoListUseCase
 import com.example.aop_part5_chapter01.presentation.list.ListViewModel
 import com.example.aop_part5_chapter01.viewModel.ViewModelTest
+import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
