@@ -1,15 +1,20 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
     defaultConfig {
         applicationId "com.example.aop_part5_chapter01"
-        minSdkVersion 16
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -34,25 +39,35 @@ android {
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.20"
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation "org.mockito:mockito-inline:3.4.0"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
-    // 코어
-    implementation "org.koin:koin-core:2.1.5"
-    // 유닛 테스트
+    // Koin for Android
+    implementation "org.koin:koin-android:2.1.5"
+    implementation "org.koin:koin-android-scope:2.1.5"
+    implementation "org.koin:koin-android-viewmodel:2.1.5"
+    implementation "org.koin:koin-android-ext:2.1.5"
     testImplementation "org.koin:koin-test:2.1.5"
-    // AndroidX Scope 생성 - 삭제 자동화
-    implementation "org.koin:koin-androidx-scope:2.1.5"
-    // AndroidX ViewModel
-    implementation "org.koin:koin-androidx-viewmodel:2.1.5"
-    // AndroidX Fragment
-    implementation "org.koin:koin-androidx-fragment:2.1.5"
 
-    implementation 'org.koin:koin-android-ext:2.1.5'
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3"
+
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.0"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
+
+    // LifeCycle Extension
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 }
