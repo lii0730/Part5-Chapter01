@@ -1,10 +1,11 @@
 package com.example.aop_part5_chapter01.viewModel.todo
 
 import com.example.aop_part5_chapter01.data.Entity.TodoEntity
+import com.example.aop_part5_chapter01.domain.todo.GetTodoItemUseCase
 import com.example.aop_part5_chapter01.domain.todo.InsertTodoListUseCase
 import com.example.aop_part5_chapter01.presentation.list.ListViewModel
+import com.example.aop_part5_chapter01.presentation.list.ToDoListState
 import com.example.aop_part5_chapter01.viewModel.ViewModelTest
-import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -25,6 +26,7 @@ internal class ListViewModelTest : ViewModelTest() {
 
     private val viewModel : ListViewModel by inject()
     private val insertTodoListUseCase : InsertTodoListUseCase by inject()
+    private val getTodoItemUseCase : GetTodoItemUseCase by inject()
     private val mockList = (0 until 10).map {
         TodoEntity(
             id = it.toLong(),
@@ -56,7 +58,35 @@ internal class ListViewModelTest : ViewModelTest() {
         viewModel.fetchData()
         testObservable.assertValueSequence(
             listOf(
-                mockList
+                ToDoListState.UnInitialized,
+                ToDoListState.Loading,
+                ToDoListState.Suceess(mockList)
+            )
+        )
+    }
+
+    // Test : 데이터를 업데이트 했을 떄 잘되는가?
+    @Test
+    fun `test Item Update`() : Unit = runBlockingTest {
+        val todo = TodoEntity(
+            id = 1,
+            title = "title 1",
+            description = "decription 1",
+            hasCompleted = true
+        )
+        viewModel.updateEntity(todo)
+        assert(getTodoItemUseCase(todo.id)?.hasCompleted ?: false == todo.hasCompleted)
+    }
+
+    // Test : 데이터를 다 날렸을 떄 빈상태로 보여지는가?
+    @Test  fun`test item delete all`() : Unit = runBlockingTest {
+        val testObservable = viewModel.todoListLiveData.test()
+        viewModel.deleteAll()
+        testObservable.assertValueSequence(
+            listOf(
+                ToDoListState.UnInitialized,
+                ToDoListState.Loading,
+                ToDoListState.Suceess(listOf())
             )
         )
     }

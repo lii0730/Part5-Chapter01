@@ -5,6 +5,7 @@ import com.example.aop_part5_chapter01.data.Entity.TodoEntity
 /**
  * 1. InsertTodoList
  * 2. GetTodoList
+ * 3. UpdateTodoItem
  */
 
 interface TodoRepository {
@@ -13,4 +14,13 @@ interface TodoRepository {
 
     suspend fun insertTodoList(todoList : List<TodoEntity>)
 
+    suspend fun insertTodoItem(todoItem : TodoEntity) : Long
+
+    suspend fun updateTodoItem(todoItem: TodoEntity) : Boolean
+
+    suspend fun getTodoItem(itemId: Long) : TodoEntity?
+
+    suspend fun deleteAll()
+
+    suspend fun deleteTodoItem(id: Long) : Boolean
 }
