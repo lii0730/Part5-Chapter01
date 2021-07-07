@@ -21,7 +21,7 @@ class DefaultTodoRepository(
         todoDao.insert(todoItem)
     }
 
-    override suspend fun updateTodoItem(todoItem: TodoEntity) : Boolean = withContext(ioDispatcher){
+    override suspend fun updateTodoItem(todoItem: TodoEntity): Unit = withContext(ioDispatcher){
         todoDao.update(todoItem)
     }
 
@@ -33,7 +33,7 @@ class DefaultTodoRepository(
         todoDao.deleteAll()
     }
 
-    override suspend fun deleteTodoItem(id: Long) : Boolean = withContext(ioDispatcher){
+    override suspend fun deleteTodoItem(id: Long) = withContext(ioDispatcher){
         todoDao.delete(id)
     }
 }

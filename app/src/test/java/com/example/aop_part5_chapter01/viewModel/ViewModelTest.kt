@@ -1,6 +1,7 @@
 package com.example.aop_part5_chapter01.viewModel
 
 import android.app.Application
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import com.example.aop_part5_chapter01.DI.appTestModule
 import com.example.aop_part5_chapter01.LiveData.LiveDataTestObserver
@@ -25,6 +26,9 @@ internal abstract class ViewModelTest : KoinTest{
 
     @get:Rule
     val mockitoRule : MockitoRule = MockitoJUnit.rule()
+
+    @get:Rule
+    val instantExecutorRule = InstantTaskExecutorRule()
 
     @Mock
     private lateinit var context : Application

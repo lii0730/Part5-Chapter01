@@ -29,7 +29,7 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
 
     private val adapter = ToDoAdapter()
 
-    override val viewModel: ListViewModel by viewModel()
+    override val viewModel: ListViewModel by viewModel() // 주입
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
         recyclerView.adapter = adapter
 
         refreshLayout.setOnRefreshListener {
-            viewModel.fetchData()
+            viewModel.fetchData() // DB에 저장된 리스트 긁어오기
         }
 
         addToDoButton.setOnClickListener {

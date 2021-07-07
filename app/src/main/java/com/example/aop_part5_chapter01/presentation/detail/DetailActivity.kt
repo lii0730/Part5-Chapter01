@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isGone
-import com.example.aop_part5_chapter01.R
 import com.example.aop_part5_chapter01.databinding.ActivityDetailBinding
 import com.example.aop_part5_chapter01.presentation.BaseActivity
 import org.koin.android.viewmodel.ext.android.viewModel

@@ -1,0 +1,38 @@
+
+
+<Koin>
+: 지연초기화 방식, 인스턴스 요청 시점에 Module을 통해 인스턴스를 생성하고 의존성을 주입한다.
+  서로 다른 Module을 여러개로 나누어서 Koin에 사용등록 하면 요청 시점에 여러 Module을 둘러보면서 인스턴스를 생성할때만 해결하면 됨.
+
+- Module : 모든 구성요소를 선언하는 공간, Koin으로 제공할 객체를 명세하는 곳
+
+Koin Component
+
+- Single: 전체 컨테이너에 영속적인 객체를 생성
+		  즉 해당객체를 싱글톤으로 제공 (by inject(), get()으로 요청)
+
+- Factory: 요청할 때마다 매번 새 인스턴스를 생성해서 제공 (싱글톤이 아님)
+  		   factory Component로 제공되는 객체는 컨테이너에 저장하지 않기 때문에 다시 참조할 수 없다.
+
+- Scoped: Scoped 컴포넌트는 명시된 Scope  생명주기에 영속적인 객체를 생성해서 제공
+		  Scoped 컴포넌트를 사용하기 위해선 필수적으로 Scope() 함수를 통해 범위 선언해주어야 함
+
+
+의존성 해결 및 주입
+: Koin 컨테이너로 의존성을 주입하려면 생성자 주입함수를 사용해야 한다 -> get() 함수
+: get() 함수는 일반적으로 생성자 값을 주입하기 위해 생성자에 사용한다.
+: 동일한 type이 서로 다른 의존성으로 주입이 필요하면 -> named 속성 으로 구분
+
+< createAtStart >
+= 지연초기화가 아닌, 모듈 선언과 동시에 즉시 생성이 필요한 경우
+createAtStart 속성을 true로 설정(Single Component에서만 의미 있음)
+
+< parametersOf() >
+: Module에 선언한 객체를 생성할 때 그때그때 다른 인자를 넘겨주어야 하는 경우엔 Injection Parameter 사용
+EX. val espresso = get<Coffee>{ parametersOf("Espresso", 4300) }
+	factory { (item: String, price: Int) -> Coffee(item, price) } // item, price 를 입력받아 객체 생성
+
+
+주입
+- single, factory => by inject() 사용
+- viewModel => by viewModel() 사용용

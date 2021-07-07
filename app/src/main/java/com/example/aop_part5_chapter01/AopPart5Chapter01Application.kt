@@ -14,7 +14,7 @@ class AopPart5Chapter01Application : Application(){
         //TODO Koin Trigger
         startKoin {
             androidLogger(Level.ERROR)
-            androidContext(this@AopPart5Chapter01Application)
+            androidContext(applicationContext)
             modules(appModule)
         }
     }

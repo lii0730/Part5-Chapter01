@@ -71,7 +71,7 @@ internal class ListViewModelTest : ViewModelTest() {
         val todo = TodoEntity(
             id = 1,
             title = "title 1",
-            description = "decription 1",
+            description = "description 1",
             hasCompleted = true
         )
         viewModel.updateEntity(todo)
